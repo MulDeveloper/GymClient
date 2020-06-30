@@ -1,8 +1,8 @@
 # Gestion de Gimnasio en Angular y Spring Boot para el Back-End
 
-##Front con Angular
+#Front con Angular
 
-##Alta
+#Alta
 
 Podemos darnos de alta
 
