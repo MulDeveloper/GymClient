@@ -52,4 +52,4 @@ Cuando modificamos las credenciales se envia un e-mail con las nuevas credencial
 )
 
 
-# APP Andoird login, perfil y reserva de clases
+# APP Android login, perfil y reserva de clases
