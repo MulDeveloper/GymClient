@@ -1,8 +1,8 @@
 # Gestion de Gimnasio en Angular y Spring Boot para el Back-End
 
-#Front con Angular
+## Front con Angular
 
-#Alta
+## Alta
 
 Podemos darnos de alta
 
@@ -10,13 +10,13 @@ Podemos darnos de alta
 
 Con envio de e-mail para las credenciales
 
-##Login
+## Login
 
 Utilizamos JWT para el login
 
 ![login](https://github.com/MulDeveloper/GymClient/blob/develop/login.png?raw=true)
 
-##Clases
+## Clases
 
 El backend nos da las clases para la semana en curso (Lunes a domingo)
 
@@ -37,7 +37,7 @@ Si no estamos logueados no nos permite reservar
 ![nologi](https://github.com/MulDeveloper/GymClient/blob/develop/nologueado.png?raw=true
 )
 
-##Perfil 
+## Perfil 
 
 Podemos modificar los datos del perfil (la tarifa o el nif no los podemos modificar)
 
