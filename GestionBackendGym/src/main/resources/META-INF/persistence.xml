@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="dev.muldev.gestiongym_backendgym_jar_0.0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>dev.muldev.gestiongym.backendgym.Modelos.ClientesGym</class>
+    <class>dev.muldev.gestiongym.backendgym.Modelos.TarifasGym</class>
+    <class>dev.muldev.gestiongym.backendgym.Modelos.MatriculasGym</class>
+    <class>dev.muldev.gestiongym.backendgym.Modelos.ClasesGym</class>
+    <class>dev.muldev.gestiongym.backendgym.Modelos.PersonalGym</class>
+    <class>dev.muldev.gestiongym.backendgym.Modelos.AccesoClientes</class>
+    <class>dev.muldev.gestiongym.backendgym.Modelos.GymRoles</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="MANAGER"/>
+    </properties>
+  </persistence-unit>
+</persistence>
