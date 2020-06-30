@@ -1,0 +1,104 @@
+<!-- Class Timetable Section Begin -->
+   <section class="class-timetable-section spad">
+       <div class="container mt-4">
+           <div class="row">
+               <div class="col-lg-6">
+                   <div class="section-title">
+                       <span>Clases dirigidas</span>
+                       <h2>Elige tu clase</h2>
+                   </div>
+               </div>
+           </div>
+           <div class="row">
+               <div class="col-lg-12">
+                   <div class="class-timetable">
+                     <table>
+                       <thead>
+                              <tr>
+                                  <th *ngFor="let dia of clasesSemana | keyvalue">
+                                    <div *ngIf="dia.key==1">LUNES</div>
+                                    <div *ngIf="dia.key==2">MARTES</div>
+                                    <div *ngIf="dia.key==3">MIERCOLES</div>
+                                    <div *ngIf="dia.key==4">JUEVES</div>
+                                    <div *ngIf="dia.key==5">VIERNES</div>
+                                    <div *ngIf="dia.key==6">SABADO</div>
+                                    <div *ngIf="dia.key==7">DOMINGO</div>
+                                  </th>
+                              </tr>
+                          </thead>
+                      <tbody>
+                        <tr>
+                          <td *ngFor="let dia of clasesSemana | keyvalue">
+                            <table>
+                              <tr *ngFor="let item of dia.value">
+                                <a (click)="reservaClase(item.idclase, item.descripcion, item.horaClase)">
+                                  <td class="dark-bg hover-bg ts-meta">
+                                    <input type="hidden" name="id" value="{{item.idclase}}">
+                                    <h5>{{item.descripcion}}</h5>
+                                    <h5>{{item.horaClase}}</h5>
+                                    <span>{{item.duracion}} min</span>
+                                  </td>
+                                </a>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                      </table>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <ng-template #no_clase>
+       <h5>no clase</h5>
+   </ng-template>
+   <!-- Class Timetable Section End -->
+
+   <!-- Footer Section Begin -->
+   <section class="footer-section">
+       <div class="container">
+           <div class="row">
+               <div class="col-lg-4">
+                   <div class="fs-about">
+                       <div class="fa-logo">
+                           <a href="#"><img src="assets/img/logo.png" alt=""></a>
+                       </div>
+                       <p>Pagina adaptada como ejemplo por MulDev usando una plantilla de COLORLIB</p>
+                   </div>
+               </div>
+               <div class="col-lg-2 col-md-3 col-sm-6">
+                   <div class="fs-widget">
+                       <h4>Enlaces</h4>
+                       <ul>
+                           <li><a [routerLink] = "['/home']">Inicio</a></li>
+                           <li><a [routerLink] = "['/clases']">Clases</a></li>
+                           <li><a [routerLink] = "['/home']">Contacto</a></li>
+                       </ul>
+                   </div>
+               </div>
+               <div class="col-lg-2 col-md-3 col-sm-6">
+                   <div class="fs-widget">
+                       <h4>Cliente</h4>
+                       <ul>
+                         <li><a [routerLink] = "['/alta']">Alta</a></li>
+                         <li><a [routerLink] = "['/home']">Contacto</a></li>
+                         <li><a [routerLink] = "['/login']">Area cliente</a></li>
+                       </ul>
+                   </div>
+               </div>
+
+           </div>
+           <div class="row">
+               <div class="col-lg-12 text-center">
+                   <div class="copyright-text">
+                       <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                     Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+   <!-- Footer Section End -->

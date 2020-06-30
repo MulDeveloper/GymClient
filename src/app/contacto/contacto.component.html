@@ -1,0 +1,116 @@
+
+
+   <!-- Contact Section Begin -->
+   <section class="contact-section spad">
+     <br>
+       <div class="container mt-4">
+           <div class="row">
+               <div class="col-lg-6">
+                   <div class="section-title contact-title">
+                       <h2>Contacto</h2>
+                   </div>
+                   <div class="contact-widget">
+                       <div class="cw-text">
+                           <i class="fa fa-map-marker"></i>
+                           <p>Calle falsa 123<br/> Granada</p>
+                       </div>
+                       <div class="cw-text">
+                           <i class="fa fa-mobile"></i>
+                           <ul>
+                               <li>958 000 000</li>
+                               <li>666 000 111</li>
+                           </ul>
+                       </div>
+                       <div class="cw-text email">
+                           <i class="fa fa-envelope"></i>
+                           <p>info@gym.com</p>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-lg-6">
+                   <div class="leave-comment">
+                       <form>
+                           <input type="text" placeholder="Nombre" [(ngModel)]="form.nombre" name="nombre" #nombre="ngModel" [ngModelOptions]="{standalone: true}" required>
+                           <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                             <div *ngIf="nombre.errors.required">
+                               Se requiere nombre
+                             </div>
+                           </div>
+                           <input type="text" placeholder="Asunto" [(ngModel)]="form.asunto" name="asunto" #asunto="ngModel" [ngModelOptions]="{standalone: true}" required>
+                           <div class="alert alert-danger" *ngIf="asunto.invalid && (asunto.dirty || asunto.touched)">
+                             <div *ngIf="asunto.errors.required">
+                               Se requiere un asunto
+                             </div>
+                           </div>
+                           <input type="text" placeholder="Telefono" [(ngModel)]="form.numeroTelefono" name="numeroTelefono" #numeroTelefono="ngModel" [ngModelOptions]="{standalone: true}" required>
+                           <div class="alert alert-danger" *ngIf="numeroTelefono.invalid && (numeroTelefono.dirty || numeroTelefono.touched)">
+                             <div *ngIf="numeroTelefono.errors.required">
+                               Se requiere un Telefono
+                             </div>
+                           </div>
+                           <textarea placeholder="Mensaje" [(ngModel)]="form.mensaje" [ngModelOptions]="{standalone: true}" name="mensaje" #mensaje="ngModel" required></textarea>
+                           <div class="alert alert-danger" *ngIf="mensaje.invalid && (mensaje.dirty || mensaje.touched)">
+                             <div *ngIf="mensaje.errors.required">
+                               Se requiere un Mensaje
+                             </div>
+                           </div>
+                           <button type="submit" (click)=enviarFormulario()>Enviar</button>
+                       </form>
+                   </div>
+               </div>
+           </div>
+           <div class="map">
+               <div style="width: 100%">
+                 <iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&height=600&hl=es&coord=37.177930599999996,-3.609653177304775&q=Plaza%20Einstein%20Granada+(Gym)&ie=UTF8&t=&z=15&iwloc=B&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+               </div>
+           </div>
+       </div>
+   </section>
+   <!-- Contact Section End -->
+
+   <!-- Footer Section Begin -->
+   <section class="footer-section">
+       <div class="container">
+           <div class="row">
+               <div class="col-lg-4">
+                   <div class="fs-about">
+                       <div class="fa-logo">
+                           <a href="#"><img src="assets/img/logo.png" alt=""></a>
+                       </div>
+                       <p>Pagina adaptada como ejemplo por MulDev usando una plantilla de COLORLIB</p>
+                   </div>
+               </div>
+               <div class="col-lg-2 col-md-3 col-sm-6">
+                   <div class="fs-widget">
+                       <h4>Enlaces</h4>
+                       <ul>
+                           <li><a [routerLink] = "['/home']">Inicio</a></li>
+                           <li><a [routerLink] = "['/clases']">Clases</a></li>
+                           <li><a [routerLink] = "['/home']">Contacto</a></li>
+                       </ul>
+                   </div>
+               </div>
+               <div class="col-lg-2 col-md-3 col-sm-6">
+                   <div class="fs-widget">
+                       <h4>Cliente</h4>
+                       <ul>
+                         <li><a [routerLink] = "['/alta']">Alta</a></li>
+                         <li><a [routerLink] = "['/home']">Contacto</a></li>
+                         <li><a [routerLink] = "['/login']">Area cliente</a></li>
+                       </ul>
+                   </div>
+               </div>
+
+           </div>
+           <div class="row">
+               <div class="col-lg-12 text-center">
+                   <div class="copyright-text">
+                       <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                     Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+   <!-- Footer Section End -->

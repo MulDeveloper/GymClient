@@ -1,0 +1,72 @@
+
+<!-- Offcanvas Menu Section Begin -->
+<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu-wrapper">
+    <div class="canvas-close">
+        <i class="fa fa-close"></i>
+    </div>
+    <div class="canvas-search search-switch">
+        <i class="fa fa-search"></i>
+    </div>
+    <nav class="canvas-menu mobile-menu">
+        <ul>
+          <ul>
+              <li><a [routerLink] = "['/home']">Inicio</a></li>
+              <li><a [routerLink] = "['/registro']">Alta</a></li>
+              <li><a [routerLink] = "['/clases']">Clases</a></li>
+              <li><a [routerLink] = "['/tarifas']">Tarifas</a></li>
+              <li><a [routerLink] = "['/contacto']">Contacto</a></li>
+          </ul>
+        </ul>
+    </nav>
+    <div id="mobile-menu-wrap"></div>
+</div>
+<!-- Offcanvas Menu Section End -->
+
+<!-- Header Section Begin -->
+<header class="header-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="logo">
+                    <a href="./index.html">
+                        <img src="assets/img/logo.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a [routerLink] = "['/home']">Inicio</a></li>
+                        <li *ngIf="nomusu != null; else nologeadoMenu" [routerLink] = "['/perfil']">
+                          <a [routerLink] = "['/perfil']">Perfil</a>
+                        </li>
+                        <ng-template #nologeadoMenu>
+                          <li>
+                            <a [routerLink] = "['/registro']">Alta</a>
+                          </li>
+                        </ng-template>
+                        <li><a [routerLink] = "['/clases']">Clases</a></li>
+                        <li><a [routerLink] = "['/tarifas']">Tarifas</a></li>
+                        <li><a [routerLink] = "['/contacto']">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3">
+                <div class="top-option">
+                    <div class="to-social">
+                        <a *ngIf="nomusu != null; else nologeado" [routerLink] = "['/perfil']"><button type="button" name="button" class="btn btn-warning ml-4">Bienvenido {{nomusu}}</button></a>
+                        <a *ngIf="nomusu != null" (click)=salir()><button type="button" name="button" class="btn btn-warning ml-4">Salir</button></a>
+                        <ng-template #nologeado>
+                            <a [routerLink] = "['/login']"><button type="button" name="button" class="btn btn-warning ml-4">Acceso cliente</button></a>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="canvas-open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+<!-- Header End -->
