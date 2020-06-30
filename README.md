@@ -1,4 +1,4 @@
-# Gestion de Gimnasio en Angular y Spring Boot para el Back-End
+# Gestion Basica Gimnasio Angular y Spring Boot (Cliente)
 
 ## Front con Angular
 
