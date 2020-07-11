@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gris"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".PerfilFragment"
+        android:id="@+id/cont_inicio">
+
+
+        <LinearLayout
+            android:layout_width="395dp"
+            android:layout_height="528dp"
+            android:gravity="center|center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/nomape"
+                android:layout_width="395dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Nombre + apellido"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/nif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="NIF"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="TELEFONO:"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/et_tel"
+                    android:layout_width="246dp"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="DIRECCION:"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/et_dir"
+                    android:layout_width="245dp"
+                    android:layout_height="47dp"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NUEVA PASS:"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/et_pass"
+                    android:layout_width="245dp"
+                    android:layout_height="47dp"
+
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvtarifa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="TARIFA ACTUAL"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_tarifa"
+                android:layout_width="268dp"
+                android:layout_height="43dp"
+                android:gravity="center"
+                android:text="TARIFA"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/bt_mod"
+                android:layout_width="296dp"
+                android:layout_height="73dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_corner_button"
+                android:text="ACTUALIZAR"
+                android:textSize="24dp" />
+        </LinearLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:itemTextColor="@color/black"
+            app:menu="@menu/menu"
+            app:labelVisibilityMode="labeled"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
