@@ -6,7 +6,7 @@
 package dev.muldev.gestiongym.backendgym.Service;
 
 import dev.muldev.gestiongym.backendgym.DAO.DAOTarifa;
-import dev.muldev.gestiongym.backendgym.Modelos.TarifasGym;
+import dev.muldev.gestiongym.backendgym.Modelos.PricesEntity;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +18,12 @@ public class ServiceTarifaImpl implements ServiceTarifa{
     private DAOTarifa dao;
 
     @Override
-    public List<TarifasGym> listaTarifas() {
+    public List<PricesEntity> listaTarifas() {
         return dao.findAll();
     }
 
     @Override
-    public TarifasGym obtenerPorId(int id) {
+    public PricesEntity obtenerPorId(int id) {
         return dao.getOne(id);
     }
     

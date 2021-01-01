@@ -9,6 +9,7 @@ import dev.muldev.gestiongym.backendgym.Modelos.FormularioContacto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +20,7 @@ public class ServiceEmailImpl implements ServiceEmail{
     
     private static final String EMAIL_CORP = "contact@muldev.dev";
 
+    @Async
     @Override
     public void enviaEmailDatosAcceso(String username, String password, String to) {
         SimpleMailMessage msg = new SimpleMailMessage();
@@ -35,6 +37,7 @@ public class ServiceEmailImpl implements ServiceEmail{
         System.out.println("Enviando..");
     }
 
+    @Async
     @Override
     public void enviaEmailModificacion(String username, String password, String to) {
         SimpleMailMessage msg = new SimpleMailMessage();
@@ -51,6 +54,7 @@ public class ServiceEmailImpl implements ServiceEmail{
         System.out.println("Enviando..");
     }
 
+    @Async
     @Override
     public void enviaEmailContacto(FormularioContacto form) {
         SimpleMailMessage msg = new SimpleMailMessage();

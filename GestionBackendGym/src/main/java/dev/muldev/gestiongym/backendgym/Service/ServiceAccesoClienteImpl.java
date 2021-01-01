@@ -2,11 +2,12 @@
 package dev.muldev.gestiongym.backendgym.Service;
 
 import dev.muldev.gestiongym.backendgym.DAO.DAOAccesoCliente;
-import dev.muldev.gestiongym.backendgym.Modelos.AccesoClientes;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import dev.muldev.gestiongym.backendgym.Modelos.ClientLoginEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +21,11 @@ public class ServiceAccesoClienteImpl implements ServiceAccesoCliente{
     private EntityManager em;
 
     @Override
-    public AccesoClientes buscaPorNomUsu(String nomusu) {
+    public ClientLoginEntity buscaPorNomUsu(String nomusu) {
         try{
-            Query q = em.createNamedQuery("AccesoClientes.findByUsername")
+            Query q = em.createNamedQuery("ClientLogin.findByUsername")
                     .setParameter("username", nomusu);
-            AccesoClientes u = (AccesoClientes) q.getSingleResult();
+            ClientLoginEntity u = (ClientLoginEntity) q.getSingleResult();
             return u;
         }
         catch(NoResultException e){
@@ -33,22 +34,9 @@ public class ServiceAccesoClienteImpl implements ServiceAccesoCliente{
     }
 
     @Override
-    public void alta(AccesoClientes a) {
+    public void alta(ClientLoginEntity a) {
         dao.save(a);
     }
 
-    @Override
-    public AccesoClientes getByClienteId(int id) {
-        //obtenemos el acceso de ese cliente
-        try{
-            Query q = em.createNamedQuery("AccesoClientes.findByIdcliente")
-                    .setParameter("idcliente", id);
-            AccesoClientes u = (AccesoClientes) q.getSingleResult();
-            return u;
-        }
-        catch(NoResultException e){
-            return null;
-        }
-    }
     
 }

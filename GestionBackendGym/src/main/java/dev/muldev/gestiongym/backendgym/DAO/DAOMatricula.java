@@ -5,11 +5,11 @@
  */
 package dev.muldev.gestiongym.backendgym.DAO;
 
-import dev.muldev.gestiongym.backendgym.Modelos.MatriculasGym;
+import dev.muldev.gestiongym.backendgym.Modelos.MembershipEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DAOMatricula extends JpaRepository <MatriculasGym, Integer>{
+public interface DAOMatricula extends JpaRepository <MembershipEntity, Integer>{
     
 }

@@ -5,9 +5,9 @@
  */
 package dev.muldev.gestiongym.backendgym.Controlador;
 
-import dev.muldev.gestiongym.backendgym.Modelos.AccesoClientes;
-import dev.muldev.gestiongym.backendgym.Modelos.ClientesGym;
-import dev.muldev.gestiongym.backendgym.Modelos.MatriculasGym;
+import dev.muldev.gestiongym.backendgym.Modelos.ClientLoginEntity;
+import dev.muldev.gestiongym.backendgym.Modelos.ClientEntity;
+import dev.muldev.gestiongym.backendgym.Modelos.MembershipEntity;
 import dev.muldev.gestiongym.backendgym.Service.ServiceAccesoCliente;
 import dev.muldev.gestiongym.backendgym.Service.ServiceCliente;
 import dev.muldev.gestiongym.backendgym.Service.ServiceEmail;
@@ -46,7 +46,7 @@ public class CtrlPerfil {
     private ServiceEmail emailService;
     
     @GetMapping("/get")
-    public ClientesGym get(@RequestParam(name="nomusu") String nomusu,
+    public ClientEntity get(@RequestParam(name="nomusu") String nomusu,
             @RequestParam(name="token") String token){
         
         //le pasamos el nomusu y el token, si es correcto devolvemos los datos
@@ -90,13 +90,13 @@ public class CtrlPerfil {
     @GetMapping("/get/tarifa/{idMat}")
     public int getTarifa(@PathVariable int idMat){
         //devolvemos el id de tarifa que tiene ese usuario
-        MatriculasGym mat = serviceMatriculas.get(idMat);
+        MembershipEntity mat = serviceMatriculas.get(idMat);
         return mat.getIdtarifa();
         
     }
     
     @PostMapping("/modifica")
-    public ClientesGym modificar(@RequestBody ClientesGym c, @RequestParam(name="token") String tkn){
+    public ClientEntity modificar(@RequestBody ClientEntity c, @RequestParam(name="token") String tkn){
         
         String username = decodeJWT(tkn);
         
@@ -152,24 +152,16 @@ public class CtrlPerfil {
         }catch(NumberFormatException e){System.out.println("Error");}
         
         if (id != -1){
-            AccesoClientes acceso = serviceAcceso.getByClienteId(id);
-            
-            if (username.equals(acceso.getUsername())){
-                //es correcto, podemos modificar el acceso
-                //encriptamos password
-                acceso.setPassword(bCrypt.encode(pass));
-                serviceAcceso.alta(acceso);
+            ClientLoginEntity acceso = serviceAcceso.buscaPorNomUsu(username);
+            //encriptamos password
+            acceso.setPassword(bCrypt.encode(pass));
+            serviceAcceso.alta(acceso);
 
-                //enviamos nuevo email con las nuevas claves
-                ClientesGym c = service.getById(id);
-                emailService.enviaEmailModificacion(c.getNifCliente(), pass, c.getEmailCliente());
-                return 1;
-            }
-            else{
-                return -1;
-            }
-           
-            
+            //enviamos nuevo email con las nuevas claves
+            ClientEntity c = service.getById(id);
+            emailService.enviaEmailModificacion(c.getNifCliente(), pass, c.getEmailCliente());
+            return 1;
+
         }
         
         

@@ -5,33 +5,23 @@
  */
 package dev.muldev.gestiongym.backendgym.Controlador;
 
-import dev.muldev.gestiongym.backendgym.Modelos.AccesoClientes;
-import dev.muldev.gestiongym.backendgym.Modelos.ClientesGym;
-import dev.muldev.gestiongym.backendgym.Modelos.GymRoles;
-import dev.muldev.gestiongym.backendgym.Modelos.MatriculasGym;
-import dev.muldev.gestiongym.backendgym.Modelos.TarifasGym;
+import dev.muldev.gestiongym.backendgym.Modelos.*;
 import dev.muldev.gestiongym.backendgym.Security.GeneraPass;
 import dev.muldev.gestiongym.backendgym.Service.ServiceAccesoCliente;
 import dev.muldev.gestiongym.backendgym.Service.ServiceCliente;
-import dev.muldev.gestiongym.backendgym.Service.ServiceEmail;
 import dev.muldev.gestiongym.backendgym.Service.ServiceMatriculas;
-import dev.muldev.gestiongym.backendgym.Service.ServiceRoles;
-import dev.muldev.gestiongym.backendgym.Service.ServiceTarifa;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,42 +41,36 @@ public class CtrlCliente {
     
     @Autowired
     private ServiceAccesoCliente serviceAcceso;
-    
-    @Autowired
-    private ServiceRoles serviceRoles;
-    
-    @Autowired
-    private ServiceEmail serviceEmail;
+
     
  
     @PostMapping("/cliente")
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientesGym alta(@RequestBody ClientesGym c){
+    public ClientEntity alta(@RequestBody ClientEntity c){
         
         //recibimos el id de tarifa en lugar del id de matricula, creamos una matricula para
         //el cliente con esa tarifa asignada
         //el cliente tendra el status por defecto inactivo 
         
-        MatriculasGym matricula = new MatriculasGym();
+        MembershipEntity matricula = new MembershipEntity();
         
         matricula.setIdtarifa(c.getIdMatricula());
-        matricula.setEstado(false);
         
+
+        LocalDateTime d = java.time.LocalDateTime.now();
+        Date fecha = convertToDateViaSqlTimestamp(d);
+        matricula.setFechaAlta(fecha);
         
-        //fecha de alta en este momento
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
-        LocalDateTime now = LocalDateTime.now();
-        Date date = new Date(dtf.format(now));  
-        matricula.setFechaAlta(date);
+        System.out.println(matricula.getFechaAlta());
 
         //guardamos el cliente con valor de matricula 0
         c.setIdMatricula(0);
-        ClientesGym cliente = service.alta(c);
+        ClientEntity cliente = service.alta(c);
         
         matricula.setIdcliente(cliente.getIdcliente());
         
         //al retornar la matricula obtenemos su id y se lo asignamos al cliente
-        MatriculasGym temporal = serviceMatriculas.altaMatricula(matricula);
+        MembershipEntity temporal = serviceMatriculas.altaMatricula(matricula);
         
         cliente.setIdMatricula(temporal.getIdmatricula());
         
@@ -94,44 +78,27 @@ public class CtrlCliente {
         
         //generamos el acceso al cliente y credenciales mandamos email
         
-        AccesoClientes ac = new AccesoClientes();
+        ClientLoginEntity ac = new ClientLoginEntity();
         
-        ac.setIdcliente(cliente.getIdcliente());
+        ac.setId(UUID.randomUUID());
         ac.setUsername(cliente.getNifCliente());
         
         //creamos password personalizada
         
         //dos letras aleatorias y fechanac (DDMMYY)
         SimpleDateFormat format = new SimpleDateFormat("ddMMyy");
-        String fecha = format.format(c.getFechaNacimiento());
-        String pass = new GeneraPass().creaPass(fecha);
-        System.out.println(pass);
-        
-        
+        String fechaNac = format.format(c.getFechaNacimiento());
+        String pass = new GeneraPass().creaPass(fechaNac);
+
         //encriptamos password
         ac.setPassword(bCrypt.encode(pass));
-        //se inserta con roles nulos, se busca usuario y se crea rol correspondiente
         serviceAcceso.alta(ac);
-        actualizaRolUsuario(cliente.getNifCliente(), "USER");
-        
-        //enviamos email con los datos al usuario
-        
-        serviceEmail.enviaEmailDatosAcceso(cliente.getNifCliente(), pass, cliente.getEmailCliente());
-        
-
         return cliente;
     }
     
-    private void actualizaRolUsuario(String username, String rolSeleccionado){
-        AccesoClientes u = serviceAcceso.buscaPorNomUsu(username);
-        if (rolSeleccionado.equals("USER")){
-            GymRoles rol = new GymRoles("USER",u);
-            serviceRoles.alta(rol);
-        }
-        else{
-            System.out.println("Error en el rol");
-        }
-        
+    public Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
+        return java.sql.Timestamp.valueOf(dateToConvert);
     }
+
     
 }

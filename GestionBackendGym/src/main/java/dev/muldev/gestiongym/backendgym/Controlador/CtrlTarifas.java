@@ -1,7 +1,7 @@
 
 package dev.muldev.gestiongym.backendgym.Controlador;
 
-import dev.muldev.gestiongym.backendgym.Modelos.TarifasGym;
+import dev.muldev.gestiongym.backendgym.Modelos.PricesEntity;
 import dev.muldev.gestiongym.backendgym.Service.ServiceTarifa;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class CtrlTarifas {
     private ServiceTarifa service;
     
     @GetMapping("/tarifas")
-    public List <TarifasGym> listar(){
+    public List <PricesEntity> listar(){
         
         return service.listaTarifas();
     }

@@ -5,14 +5,13 @@
  */
 package dev.muldev.gestiongym.backendgym.Controlador;
 
-import dev.muldev.gestiongym.backendgym.Modelos.ClasesGym;
-import dev.muldev.gestiongym.backendgym.Modelos.ClientesGym;
+import dev.muldev.gestiongym.backendgym.Modelos.ClientEntity;
+import dev.muldev.gestiongym.backendgym.Modelos.GymClassEntity;
 import dev.muldev.gestiongym.backendgym.Service.ServiceClases;
 import dev.muldev.gestiongym.backendgym.Service.ServiceCliente;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.temporal.TemporalAmount;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,11 +47,11 @@ public class CtrlClases {
     //solo obtenemos las clases de ESTA SEMANA
    
     @GetMapping("/clases")
-    public Map<Integer, List<ClasesGym>> listaClases(){
-        List<ClasesGym> lista = null;
-        List<List<ClasesGym>> listaDeListas = new ArrayList<List<ClasesGym>>();
+    public Map<Integer, List<GymClassEntity>> listaClases(){
+        List<GymClassEntity> lista = null;
+        List<List<GymClassEntity>> listaDeListas = new ArrayList<List<GymClassEntity>>();
         
-        Map<Integer, List<ClasesGym>> resultado = new TreeMap<Integer, List<ClasesGym>>();
+        Map<Integer, List<GymClassEntity>> resultado = new TreeMap<Integer, List<GymClassEntity>>();
 
         try{
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -82,26 +81,26 @@ public class CtrlClases {
             lista = service.listaClasesSemana(fDesde, fHasta);
 
             //group by fecha
-            Map<Date, List<ClasesGym>> result = lista.stream().collect(Collectors.groupingBy(ClasesGym::getFechaClase));
+            Map<Date, List<GymClassEntity>> result = lista.stream().collect(Collectors.groupingBy(GymClassEntity::getDateClass));
 
-            for (Map.Entry<Date, List<ClasesGym>> entry : result.entrySet()) {
+            for (Map.Entry<Date, List<GymClassEntity>> entry : result.entrySet()) {
                 
-                ArrayList <ClasesGym> clases = new ArrayList(entry.getValue());
+                ArrayList <GymClassEntity> clases = new ArrayList(entry.getValue());
                 
                 //ordenamos lista por hora
-                Collections.sort(clases, new Comparator<ClasesGym>() {
-                    public int compare(ClasesGym o1, ClasesGym o2) {
-                        if (o1.getHoraClase() == null || o2.getHoraClase() == null)
+                Collections.sort(clases, new Comparator<GymClassEntity>() {
+                    public int compare(GymClassEntity o1, GymClassEntity o2) {
+                        if (o1.getTimeClass() == null || o2.getTimeClass() == null)
                           return 0;
-                        return o1.getHoraClase().compareTo(o2.getHoraClase());
+                        return o1.getTimeClass().compareTo(o2.getTimeClass());
                     }
                 });
 
                 listaDeListas.add(clases);
                 
-                for (List<ClasesGym> l: listaDeListas){
+                for (List<GymClassEntity> l: listaDeListas){
                     //segun sea el dia le pondremos una key u otra
-                    Date date = l.get(0).getFechaClase();
+                    Date date = l.get(0).getDateClass();
                     String ds = format.format(date);
                     
                     if(ds.equals(diasAux[0])){
@@ -140,9 +139,9 @@ public class CtrlClases {
         return resultado;
     }
     
-    private Integer[] listaClientes(ClasesGym clase){
+    private Integer[] listaClientes(GymClassEntity clase){
         //obtenemos los clientes para esa clase
-        Integer [] clientes = (Integer[]) clase.getListaClientes();
+        Integer [] clientes = (Integer[]) clase.getClients();
         return clientes;
     }
     
@@ -184,7 +183,7 @@ public class CtrlClases {
         
             //buscamos el id de ese usuario y se lo insertamos a la lista de clientes de ESA clase
 
-            ClientesGym cli = serviceCliente.buscaPorUsername(nomusu);
+            ClientEntity cli = serviceCliente.buscaPorUsername(nomusu);
 
             int id = -1;
 
@@ -199,7 +198,7 @@ public class CtrlClases {
 
 
             if (id != -1){
-                ClasesGym clase = service.getOne(id);
+                GymClassEntity clase = service.getOne(id);
                 Integer [] clientes = listaClientes(clase);
                 for (int i=0; i<clientes.length;i++){
                     if (clientes[i] == cli.getIdcliente()){
@@ -207,7 +206,7 @@ public class CtrlClases {
                     }
                 }
                 if (add){
-                    clase.setListaClientes(append(clientes, cli.getIdcliente()));
+                    clase.setClients(append(clientes, cli.getIdcliente()));
                     service.actualizaCliente(clase);
                     return true;
                 }
@@ -225,9 +224,9 @@ public class CtrlClases {
     }
     
     private Integer[] append(Integer[] arr, int element) {
-	Integer[] array = new Integer[arr.length + 1];
-	System.arraycopy(arr, 0, array, 0, arr.length);
-	array[arr.length] = element;
-	return array;
+        Integer[] array = new Integer[arr.length + 1];
+        System.arraycopy(arr, 0, array, 0, arr.length);
+        array[arr.length] = element;
+        return array;
     }
 }

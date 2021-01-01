@@ -16,7 +16,6 @@ export class PerfilService {
   private endPointModificaAcceso: string = 'http://localhost:8080/api/cliente/modificaAcceso';
   private endPointGetTarifa: string = 'http://localhost:8080/api/cliente/get/tarifa';
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-  private nomusu: string;
 
   constructor(private http: HttpClient,private router: Router) { }
 
