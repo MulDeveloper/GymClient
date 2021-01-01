@@ -53,3 +53,31 @@ Cuando modificamos las credenciales se envia un e-mail con las nuevas credencial
 
 
 # APP Android login, perfil y reserva de clases
+
+App de Android con login, actualizacion de direccion, telefono, pass y reserva de clases.
+
+Login
+
+![login](https://github.com/MulDeveloper/GymClient/blob/develop/androidInicio.jpg
+)
+
+Perfil
+
+![perfil](https://github.com/MulDeveloper/GymClient/blob/develop/androidPerfil.jpg
+)
+
+Clases cargadas por dia en seleccion de Spinner
+
+![clases](https://github.com/MulDeveloper/GymClient/blob/develop/clasesRecycler.jpg
+)
+
+Reserva
+
+![ok](https://github.com/MulDeveloper/GymClient/blob/develop/androidOk.jpg
+)
+
+![no](https://github.com/MulDeveloper/GymClient/blob/develop/androidReservado.jpg
+)
+
+
+
