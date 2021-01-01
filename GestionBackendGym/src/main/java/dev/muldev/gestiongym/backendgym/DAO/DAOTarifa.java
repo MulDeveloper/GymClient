@@ -5,11 +5,11 @@
  */
 package dev.muldev.gestiongym.backendgym.DAO;
 
-import dev.muldev.gestiongym.backendgym.Modelos.TarifasGym;
+import dev.muldev.gestiongym.backendgym.Modelos.PricesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DAOTarifa extends JpaRepository <TarifasGym, Integer>{
+public interface DAOTarifa extends JpaRepository <PricesEntity, Integer>{
     
 }

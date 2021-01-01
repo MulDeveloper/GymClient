@@ -6,15 +6,11 @@
 package dev.muldev.gestiongym.backendgym.Jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.muldev.gestiongym.backendgym.Modelos.AccesoClientes;
-import dev.muldev.gestiongym.backendgym.Modelos.ClientesGym;
 import dev.muldev.gestiongym.backendgym.Service.ServiceAccesoCliente;
 import dev.muldev.gestiongym.backendgym.Service.ServiceCliente;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.FilterChain;
@@ -26,7 +22,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
@@ -83,15 +78,8 @@ public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter{
                 .setSubject(authResult.getName())
                 .signWith(SignatureAlgorithm.HS512, KEY.getBytes())
                 .compact();
-                
-       
-        //obtenemos roles
-        
-        Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
-        
-        Claims claims = Jwts.claims();
-        claims.put("authorities", new ObjectMapper().writeValueAsString(roles));
-        
+
+
         //usamos el prefijo Bearer para pasar al cliente
         response.addHeader("Authorization", "Bearer " + token);
         
@@ -100,7 +88,6 @@ public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter{
         respuesta.put("nomusu", authResult.getName());
         respuesta.put("mensaje", "Login correcto");
         respuesta.put("estado", 1);
-        respuesta.put("roles", claims);
 
         
         //convertimos respuesta a JSON

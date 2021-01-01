@@ -5,7 +5,7 @@
  */
 package dev.muldev.gestiongym.backendgym.Service;
 
-import dev.muldev.gestiongym.backendgym.Modelos.TarifasGym;
+import dev.muldev.gestiongym.backendgym.Modelos.PricesEntity;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ import java.util.List;
  * @author bunn3
  */
 public interface ServiceTarifa {
-    public List <TarifasGym> listaTarifas();
+    public List <PricesEntity> listaTarifas();
     
-    public TarifasGym obtenerPorId(int id);
+    public PricesEntity obtenerPorId(int id);
 }

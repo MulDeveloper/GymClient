@@ -25,6 +25,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.nomusu = localStorage.getItem('nomusu');
 
+
     if (this.nomusu === null || this.nomusu === ""){
       this.router.navigate(['/']);
     }
@@ -38,6 +39,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
        //asignamos el valor
        (cliente) =>  this.cliente = cliente
     );
+
 
   }
 

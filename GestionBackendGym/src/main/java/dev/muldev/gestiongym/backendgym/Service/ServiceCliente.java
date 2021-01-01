@@ -5,7 +5,7 @@
  */
 package dev.muldev.gestiongym.backendgym.Service;
 
-import dev.muldev.gestiongym.backendgym.Modelos.ClientesGym;
+import dev.muldev.gestiongym.backendgym.Modelos.ClientEntity;
 
 /**
  *
@@ -13,10 +13,10 @@ import dev.muldev.gestiongym.backendgym.Modelos.ClientesGym;
  */
 public interface ServiceCliente {
     
-    public ClientesGym alta(ClientesGym c);
+    public ClientEntity alta(ClientEntity c);
     
-    public ClientesGym buscaPorUsername(String username);
+    public ClientEntity buscaPorUsername(String username);
     
-    public ClientesGym getById(int id);
+    public ClientEntity getById(int id);
     
 }

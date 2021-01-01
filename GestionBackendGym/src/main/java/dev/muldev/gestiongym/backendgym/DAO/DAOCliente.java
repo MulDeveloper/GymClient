@@ -5,12 +5,12 @@
  */
 package dev.muldev.gestiongym.backendgym.DAO;
 
-import dev.muldev.gestiongym.backendgym.Modelos.ClientesGym;
+import dev.muldev.gestiongym.backendgym.Modelos.ClientEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DAOCliente extends JpaRepository<ClientesGym, Integer>{
+public interface DAOCliente extends JpaRepository<ClientEntity, Integer>{
     
     
 }

@@ -5,7 +5,7 @@
  */
 package dev.muldev.gestiongym.backendgym.Service;
 
-import dev.muldev.gestiongym.backendgym.Modelos.ClasesGym;
+import dev.muldev.gestiongym.backendgym.Modelos.GymClassEntity;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +14,8 @@ import java.util.List;
  * @author bunn3
  */
 public interface ServiceClases {
-    public List<ClasesGym> listaClases();
-    public List<ClasesGym> listaClasesSemana(Date desde, Date hasta);
-    public ClasesGym getOne(int id);
-    public void actualizaCliente(ClasesGym clase);
+    public List<GymClassEntity> listaClases();
+    public List<GymClassEntity> listaClasesSemana(Date desde, Date hasta);
+    public GymClassEntity getOne(int id);
+    public void actualizaCliente(GymClassEntity clase);
 }

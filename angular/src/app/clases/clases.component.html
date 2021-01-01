@@ -31,12 +31,12 @@
                           <td *ngFor="let dia of clasesSemana | keyvalue">
                             <table>
                               <tr *ngFor="let item of dia.value">
-                                <a (click)="reservaClase(item.idclase, item.descripcion, item.horaClase)">
+                                <a (click)="reservaClase(item.idclass, item.description, item.timeClass)">
                                   <td class="dark-bg hover-bg ts-meta">
-                                    <input type="hidden" name="id" value="{{item.idclase}}">
-                                    <h5>{{item.descripcion}}</h5>
-                                    <h5>{{item.horaClase}}</h5>
-                                    <span>{{item.duracion}} min</span>
+                                    <input type="hidden" name="id" value="{{item.idclass}}">
+                                    <h5>{{item.description}}</h5>
+                                    <h5>{{item.timeClass}}</h5>
+                                    <span>{{item.duration}} min</span>
                                   </td>
                                 </a>
                               </tr>

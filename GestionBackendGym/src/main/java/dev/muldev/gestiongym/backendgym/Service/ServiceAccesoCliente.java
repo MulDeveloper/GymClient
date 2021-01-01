@@ -1,11 +1,10 @@
 
 package dev.muldev.gestiongym.backendgym.Service;
 
-import dev.muldev.gestiongym.backendgym.Modelos.AccesoClientes;
+import dev.muldev.gestiongym.backendgym.Modelos.ClientLoginEntity;
 
 
 public interface ServiceAccesoCliente {
-    public AccesoClientes buscaPorNomUsu(String nomusu);
-    public void alta(AccesoClientes a);
-    public AccesoClientes getByClienteId(int id);
+    public ClientLoginEntity buscaPorNomUsu(String nomusu);
+    public void alta(ClientLoginEntity a);
 }

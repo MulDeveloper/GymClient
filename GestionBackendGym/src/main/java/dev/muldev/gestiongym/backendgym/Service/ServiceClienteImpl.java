@@ -6,8 +6,7 @@
 package dev.muldev.gestiongym.backendgym.Service;
 
 import dev.muldev.gestiongym.backendgym.DAO.DAOCliente;
-import dev.muldev.gestiongym.backendgym.Modelos.AccesoClientes;
-import dev.muldev.gestiongym.backendgym.Modelos.ClientesGym;
+import dev.muldev.gestiongym.backendgym.Modelos.ClientEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -25,16 +24,16 @@ public class ServiceClienteImpl implements ServiceCliente{
     private EntityManager em;
 
     @Override
-    public ClientesGym alta(ClientesGym c) {
+    public ClientEntity alta(ClientEntity c) {
         return dao.save(c);
     }
 
     @Override
-    public ClientesGym buscaPorUsername(String username) {
+    public ClientEntity buscaPorUsername(String username) {
         try{
             Query q = em.createNamedQuery("ClientesGym.findByNifCliente")
                     .setParameter("nifCliente", username);
-            ClientesGym a = (ClientesGym) q.getSingleResult();
+            ClientEntity a = (ClientEntity) q.getSingleResult();
             return a;
             
         }
@@ -45,7 +44,7 @@ public class ServiceClienteImpl implements ServiceCliente{
     }
 
     @Override
-    public ClientesGym getById(int id) {
+    public ClientEntity getById(int id) {
         return dao.getOne(id);
     }
 

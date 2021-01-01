@@ -5,10 +5,10 @@
  */
 package dev.muldev.gestiongym.backendgym.Service;
 
-import dev.muldev.gestiongym.backendgym.Modelos.MatriculasGym;
+import dev.muldev.gestiongym.backendgym.Modelos.MembershipEntity;
 
 
 public interface ServiceMatriculas {
-    public MatriculasGym altaMatricula(MatriculasGym m);
-    public MatriculasGym get(int id);
+    public MembershipEntity altaMatricula(MembershipEntity m);
+    public MembershipEntity get(int id);
 }

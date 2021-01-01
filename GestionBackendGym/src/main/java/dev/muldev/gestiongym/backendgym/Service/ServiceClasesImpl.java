@@ -6,7 +6,7 @@
 package dev.muldev.gestiongym.backendgym.Service;
 
 import dev.muldev.gestiongym.backendgym.DAO.DAOClases;
-import dev.muldev.gestiongym.backendgym.Modelos.ClasesGym;
+import dev.muldev.gestiongym.backendgym.Modelos.GymClassEntity;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -28,19 +28,19 @@ public class ServiceClasesImpl implements ServiceClases{
     private EntityManager em;
 
     @Override
-    public List<ClasesGym> listaClases() {
+    public List<GymClassEntity> listaClases() {
         return dao.findAll();
     }
     
     @Override
-    public List<ClasesGym> listaClasesSemana(Date desde, Date hasta){
+    public List<GymClassEntity> listaClasesSemana(Date desde, Date hasta){
         try{
-            Query q = em.createNamedQuery("ClasesGym.findByFechaConcreta").setParameter("desde", desde)
+            Query q = em.createNamedQuery("GymClassEntity.findByFechaConcreta").setParameter("desde", desde)
                    .setParameter("hasta", hasta);
-            List<ClasesGym> clases = q.getResultList();
-            Collections.sort(clases, new Comparator<ClasesGym>() {
-                public int compare(ClasesGym o1, ClasesGym o2) {
-                    return o1.getFechaClase().compareTo(o2.getFechaClase());
+            List<GymClassEntity> clases = q.getResultList();
+            Collections.sort(clases, new Comparator<GymClassEntity>() {
+                public int compare(GymClassEntity o1, GymClassEntity o2) {
+                    return o1.getDateClass().compareTo(o2.getDateClass());
                 }
                 });
             
@@ -52,12 +52,12 @@ public class ServiceClasesImpl implements ServiceClases{
     }
 
     @Override
-    public ClasesGym getOne(int id) {
+    public GymClassEntity getOne(int id) {
         return dao.getOne(id);
     }
 
     @Override
-    public void actualizaCliente(ClasesGym clase) {
+    public void actualizaCliente(GymClassEntity clase) {
         dao.save(clase);
     }
     
